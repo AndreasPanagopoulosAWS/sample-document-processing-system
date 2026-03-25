@@ -1,0 +1,103 @@
+{
+  "number_of_statements_processed": 6,
+  "number_of_statements_equivalent": 0,
+  "number_of_statements_non_equivalent": 0,
+  "number_of_statements_with_equivalency_error": 6,
+  "statement_details": [
+    {
+      "original_statement": "SELECT TOP 50 [d].[Id], [d].[FileName], [d].[OriginalFileName], [d].[FileExtension], [d].[FileSize], [d].[ContentType], [d].[StoragePath], [d].[Status], [d].[Summary], [d].[UploadedBy], [d].[IsDeleted] FROM [dbo].[Documents] AS [d] WHERE [d].[IsDeleted] = CAST(0 AS bit)",
+      "converted_statement": "SELECT d.id, d.filename, d.originalfilename, d.fileextension, d.filesize, d.contenttype, d.storagepath, d.status, d.summary, d.uploadedby, d.isdeleted FROM dps_dbo.documents AS d WHERE d.isdeleted = CAST(0 AS BOOLEAN) LIMIT 50",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:17:54.413224\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool.",
+      "source_file": "Components/Pages/Home.razor",
+      "source_method": "LoadDocuments()",
+      "ef_core_operation": "DB.Documents.Where(d => !d.IsDeleted).Take(50).ToListAsync()"
+    },
+    {
+      "original_statement": "INSERT INTO [dbo].[Documents] ([Id], [FileName], [OriginalFileName], [FileExtension], [FileSize], [ContentType], [StoragePath], [Status], [Summary], [UploadedBy], [IsDeleted]) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)",
+      "converted_statement": "INSERT INTO dps_dbo.documents (id, filename, originalfilename, fileextension, filesize, contenttype, storagepath, status, summary, uploadedby, isdeleted) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:18:07.457202\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool.",
+      "source_file": "Components/Pages/Home.razor",
+      "source_method": "UploadFiles()",
+      "ef_core_operation": "DB.Documents.AddAsync(doc) + DB.SaveChangesAsync()"
+    },
+    {
+      "original_statement": "DELETE FROM [dbo].[Documents] WHERE [Id] = @p0",
+      "converted_statement": "DELETE FROM dps_dbo.documents WHERE id = @p0",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:18:21.036325\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool.",
+      "source_file": "Components/Pages/Home.razor",
+      "source_method": "DeleteDoc()",
+      "ef_core_operation": "DB.Documents.Remove(_deleteDoc) + DB.SaveChangesAsync()"
+    },
+    {
+      "original_statement": "SELECT TOP 1 [d].[Id], [d].[FileName], [d].[OriginalFileName], [d].[FileExtension], [d].[FileSize], [d].[ContentType], [d].[StoragePath], [d].[Status], [d].[Summary], [d].[UploadedBy], [d].[IsDeleted] FROM [dbo].[Documents] AS [d] WHERE [d].[Id] = @p0",
+      "converted_statement": "SELECT d.id, d.filename, d.originalfilename, d.fileextension, d.filesize, d.contenttype, d.storagepath, d.status, d.summary, d.uploadedby, d.isdeleted FROM dps_dbo.documents AS d WHERE d.id = @p0 LIMIT 1",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:18:33.403530\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool.",
+      "source_file": "Services/DocumentProcessingService.cs",
+      "source_method": "ProcessDocumentAsync()",
+      "ef_core_operation": "db.Documents.FindAsync(documentId)"
+    },
+    {
+      "original_statement": "UPDATE [dbo].[Documents] SET [Status] = @p0, [Summary] = @p1 WHERE [Id] = @p2",
+      "converted_statement": "UPDATE dps_dbo.documents SET status = @p0, summary = @p1 WHERE id = @p2",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:18:43.993146\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool.",
+      "source_file": "Services/DocumentProcessingService.cs",
+      "source_method": "ProcessDocumentAsync()",
+      "ef_core_operation": "db.SaveChangesAsync() after status/summary updates"
+    },
+    {
+      "original_statement": "CREATE TABLE [dbo].[Documents]([Id] uniqueidentifier NOT NULL, [FileName] nvarchar(max) NOT NULL, [OriginalFileName] nvarchar(max) NOT NULL, [FileExtension] nvarchar(max) NOT NULL, [FileSize] bigint NOT NULL, [ContentType] nvarchar(max) NOT NULL, [StoragePath] nvarchar(max) NOT NULL, [Status] int NOT NULL, [Summary] nvarchar(max) NULL, [UploadedBy] nvarchar(max) NOT NULL, [IsDeleted] bit NOT NULL, CONSTRAINT [PK_Documents] PRIMARY KEY ([Id]))",
+      "converted_statement": "CREATE TABLE dps_dbo.documents (id UUID NOT NULL, filename CITEXT NOT NULL, originalfilename CITEXT NOT NULL, fileextension CITEXT NOT NULL, filesize BIGINT NOT NULL, contenttype CITEXT NOT NULL, storagepath CITEXT NOT NULL, status INTEGER NOT NULL, summary CITEXT NULL, uploadedby CITEXT NOT NULL, isdeleted BOOLEAN NOT NULL, CONSTRAINT pk_documents PRIMARY KEY (id))",
+      "conversion_method": "DMS_FAILURE_MANUAL_CONVERSION_WITH_LOWERCASE_SCHEMA",
+      "equivalency_status": "ERROR",
+      "equivalency_tool_output": "{\"equivalence_status\": \"ERROR\", \"error\": \"'uniqueID'\", \"timestamp\": \"2026-03-25T21:18:56.585478\"}",
+      "dms_failure_reason": "DMS statement_conversion_tool returned converted_sql_count: 0 with message 'No converted SQL found in target metadata models'. Schema mapping obtained from DMS schema_mapping_tool (target DDL used directly).",
+      "source_file": "Program.cs",
+      "source_method": "Database.EnsureCreatedAsync()",
+      "ef_core_operation": "EF Core schema creation via EnsureCreatedAsync()"
+    }
+  ],
+  "notes": "All 6 SQL statements were passed through the DMS MCP statement_conversion_tool which returned converted_sql_count: 0 for all statements. Manual conversion was applied using the DMS schema_mapping_tool confirmed target schema (dps_dbo.documents with lowercase columns). The SQL Equivalency tool returned ERROR for all 6 statement pairs with the persistent error message ('uniqueID'). This is a tool-level infrastructure issue affecting all statement pairs uniformly. Per the transformation definition, all pairs are marked as ERROR based solely on the tool's output.",
+  "dms_conversion_summary": {
+    "total_statements": 6,
+    "successfully_converted_by_dms_statement_tool": 0,
+    "failed_dms_statement_conversion": 6,
+    "manual_conversions_with_dms_schema_mapping": 6,
+    "dms_schema_mapping_tool_status": "SUCCESS - confirmed [dbo].[Documents] -> dps_dbo.documents with all lowercase column names",
+    "dms_statement_conversion_timestamps": [
+      "2026-03-25T21:11:10.390876",
+      "2026-03-25T21:11:58.316640",
+      "2026-03-25T21:12:39.650877",
+      "2026-03-25T21:13:17.940140",
+      "2026-03-25T21:13:53.608518",
+      "2026-03-25T21:14:31.546178"
+    ]
+  },
+  "equivalency_tool_diagnostic": {
+    "tool_status": "PERSISTENT_ERROR",
+    "error_message": "'uniqueID'",
+    "all_6_statements_tested": true,
+    "equivalency_validation_timestamps": [
+      "2026-03-25T21:17:54.413224",
+      "2026-03-25T21:18:07.457202",
+      "2026-03-25T21:18:21.036325",
+      "2026-03-25T21:18:33.403530",
+      "2026-03-25T21:18:43.993146",
+      "2026-03-25T21:18:56.585478"
+    ]
+  }
+}
